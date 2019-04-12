@@ -24,4 +24,29 @@ describe "Yahtzee" do
     result = Yahtzee.score_by_rule(dice, "twos")
     expect(result).to eq(6)
   end
+
+  it "scores threes" do
+    dice = [1, 1, 1, 3, 3]
+    result = Yahtzee.score_by_rule(dice, "threes")
+    expect(result).to eq(6)
+  end
+
+  it "scores fours" do
+    dice = [4, 4, 4, 4, 5]
+    result = Yahtzee.score_by_rule(dice, "fours")
+    expect(result).to eq(16)
+  end
+
+  it "scores fives" do
+    dice = [5, 1, 1, 1, 2]
+    result = Yahtzee.score_by_rule(dice, "fives")
+    expect(result).to eq(5)
+  end
+
+  it "scores sixes" do
+    dice = [6, 6, 1, 1, 2]
+    result = Yahtzee.score_by_rule(dice, "sixes")
+    expect(result).to eq(12)
+  end
+
 end
