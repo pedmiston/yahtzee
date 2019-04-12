@@ -49,4 +49,10 @@ describe "Yahtzee" do
     expect(result).to eq(12)
   end
 
+  it "scores singles as 0 if none are in dice" do
+    dice = [6, 4, 3, 3, 5]
+    result = Yahtzee.score_by_rule(dice, "ones")
+    expect(result).to eq(0)
+  end
+
 end
