@@ -73,4 +73,52 @@ describe "Yahtzee" do
     expect(result).to eq(12)
   end
 
+  it "scores two pairs" do
+    dice = [6, 6, 4, 4, 2]
+    result = Yahtzee.score_by_rule(dice, "two_pair")
+    expect(result).to eq(20)
+  end
+
+  it "scores three of a kind" do
+    dice = [6, 5, 5, 5, 2]
+    result = Yahtzee.score_by_rule(dice, "three_of_a_kind")
+    expect(result).to eq(15)
+  end
+
+  it "scores four of a kind" do
+    dice = [1, 1, 1, 1, 2]
+    result = Yahtzee.score_by_rule(dice, "four_of_a_kind")
+    expect(result).to eq(4)
+  end
+
+  it "scores Yahtzee" do
+    dice = [1, 1, 1, 1, 1]
+    result = Yahtzee.score_by_rule(dice, "Yahtzee")
+    expect(result).to eq(50)
+  end
+
+  it "doesn't score a Yahtzee if all die are not the same" do
+    dice = [1, 1, 1, 1, 2]
+    result = Yahtzee.score_by_rule(dice, "Yahtzee")
+    expect(result).to eq(0)
+  end
+
+  it "scores a full house" do
+    dice = [2, 2, 1, 1, 1]
+    result = Yahtzee.score_by_rule(dice, "full_house")
+    expect(result).to eq(7)
+  end
+
+  it "should not score a full house unless rolls contain pair and three of a kind" do
+    dice = [1, 1, 2, 2, 4]
+    result = Yahtzee.score_by_rule(dice, "full_house")
+    expect(result).to eq(0)
+  end
+
+  it "should score a small straight" do
+    dice = [5, 4, 2, 3, 1]
+    result = Yahtzee.score_by_rule(dice, "small_straight") 
+    expect(result).to eq(15)
+  end
+
 end
