@@ -11,14 +11,12 @@ class Yahtzee
       end
       total
     else
-      dice.sum()
-      # sum_dice(dice)
+      # dice.sum()
+      sum_dice(dice)
     end
   end
 
-  private
-
-  def sum_dice(dice)
+  def self.sum_dice(dice)
     dice.sum()
   end
 
