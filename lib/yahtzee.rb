@@ -3,21 +3,12 @@ class Yahtzee
 
   def self.score_by_rule(dice, rule)
     if SINGLES.include?(rule)
-      total = 0
-      dice.each do |die|
-        if die == SINGLES[rule]
-          total += SINGLES[rule]
-        end
-      end
-      total
+      dice
+        .select{|die| die == SINGLES[rule]}
+        .sum()
     else
-      # dice.sum()
-      sum_dice(dice)
+      dice.sum()
     end
-  end
-
-  def self.sum_dice(dice)
-    dice.sum()
   end
 
 end
