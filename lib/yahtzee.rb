@@ -6,6 +6,12 @@ class Yahtzee
       dice
         .select{|die| die == SINGLES[rule]}
         .sum()
+    elsif rule == "pair"
+      [1, 2, 3, 4, 5, 6].map do |die|
+        if dice.count(die) >= 2
+          die * 2
+        end
+      end.compact.pop
     else
       dice.sum()
     end

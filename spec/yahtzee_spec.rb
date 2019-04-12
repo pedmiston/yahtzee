@@ -55,4 +55,22 @@ describe "Yahtzee" do
     expect(result).to eq(0)
   end
 
+  it "scores a single pair" do
+    dice = [6, 6, 4, 3, 2]
+    result = Yahtzee.score_by_rule(dice, "pair")
+    expect(result).to eq(12)
+  end
+
+  it "scores the highest pair" do
+    dice = [6, 6, 5, 5, 2]
+    result = Yahtzee.score_by_rule(dice, "pair")
+    expect(result).to eq(12)
+  end
+
+  it "scores a pair when there are three" do
+    dice = [6, 6, 6, 5, 2]
+    result = Yahtzee.score_by_rule(dice, "pair")
+    expect(result).to eq(12)
+  end
+
 end
