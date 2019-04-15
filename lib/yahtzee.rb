@@ -2,7 +2,7 @@ class Yahtzee
   SINGLES = {"ones" => 1, "twos" => 2, "threes" => 3, "fours" => 4, "fives" => 5, "sixes" => 6}
   DUPLICATES = {"pair" => 2, "three_of_a_kind" => 3, "four_of_a_kind" => 4}
 
-  def self.score_by_rule(dice, rule)
+  def score_by_rule(dice, rule)
     if SINGLES.include?(rule)
       dice
         .select{|die| die == SINGLES[rule]}
@@ -28,7 +28,7 @@ class Yahtzee
     end
   end
 
-  def self.get_multiples(dice, n)
+  def get_multiples(dice, n)
     [1, 2, 3, 4, 5, 6].map do |die|
       if dice.count(die) >= n
         die * n
@@ -36,7 +36,7 @@ class Yahtzee
     end.compact
   end
 
-  def self.has_three_of_a_kind(dice)
+  def has_three_of_a_kind(dice)
     [1, 2, 3, 4, 5, 6].map do |die|
       if dice.count(die) == 3
         return true
