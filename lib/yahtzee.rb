@@ -5,31 +5,65 @@ class Yahtzee
   def score_by_rule(dice, rule)
     case rule
     when -> (rule) { SINGLES.include?(rule) }
-      dice
-        .select{|die| die == SINGLES[rule]}
-        .sum()
+      singles(dice, SINGLES[rule])
     when -> (rule) { DUPLICATES.include?(rule) }
-        get_multiples(dice, DUPLICATES[rule]).pop
+      duplicates(dice, DUPLICATES[rule])
     when "two_pair"
-        get_multiples(dice, 2).sum
+      two_pair(dice)
     when "Yahtzee"
-        dice.uniq.length == 1 ? 50 : 0
+      yahtzee(dice)
     when "full_house"
-        if dice.uniq.length == 2 && has_three_of_a_kind(dice)
-          dice.sum
-        else
-          0
-        end
+      full_house(dice)
     when "small_straight"
-        dice.sort() == [1, 2, 3, 4, 5] ? dice.sum : 0
+      small_straight(dice)
     when "large_straight"
-        dice.sort() == [2, 3, 4, 5, 6] ? dice.sum : 0
+      large_straight(dice)
+    when "chance"
+      chance(dice)
     else
-        dice.sum()
+      raise "don't know how to score by rule #{rule}"
     end
   end
 
   private
+
+  def singles(dice, n)
+    dice
+      .select{|die| die == n}
+      .sum()
+  end
+
+  def duplicates(dice, n)
+    get_multiples(dice, n).pop
+  end
+
+  def two_pair(dice)
+    get_multiples(dice, 2).sum
+  end
+
+  def yahtzee(dice)
+    dice.uniq.length == 1 ? 50 : 0
+  end
+
+  def small_straight(dice)
+    dice.sort() == [1, 2, 3, 4, 5] ? dice.sum : 0
+  end
+
+  def large_straight(dice)
+    dice.sort() == [2, 3, 4, 5, 6] ? dice.sum : 0
+  end
+
+  def full_house(dice)
+    if dice.uniq.length == 2 && has_three_of_a_kind(dice)
+      dice.sum
+    else
+      0
+    end
+  end
+
+  def chance(dice)
+    dice.sum
+  end
 
   def get_multiples(dice, n)
     [1, 2, 3, 4, 5, 6].map do |die|

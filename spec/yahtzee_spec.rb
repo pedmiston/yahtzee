@@ -149,4 +149,10 @@ describe "Yahtzee" do
     expect(result).to eq(0)
   end
 
+  it "should raise an error if given a bad rule" do
+    dice = [1, 2, 3, 4, 5]
+    expect { @yahtzee.score_by_rule(dice, "not_a_rule") } .to raise_error("don't know how to score by rule not_a_rule")
+  end
+    
+
 end
