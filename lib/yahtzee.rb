@@ -14,7 +14,15 @@ class Yahtzee
     elsif rule == "Yahtzee"
       dice.uniq.length == 1 ? 50 : 0
     elsif rule == "full_house"
-      dice.uniq.length == 2 ? dice.sum : 0
+      if dice.uniq.length == 2 && has_three_of_a_kind(dice)
+        dice.sum
+      else
+        0
+      end
+    elsif rule == "small_straight"
+      dice.sort() == [1, 2, 3, 4, 5] ? dice.sum : 0
+    elsif rule == "large_straight"
+      dice.sort() == [2, 3, 4, 5, 6] ? dice.sum : 0
     else
       dice.sum()
     end
@@ -26,6 +34,15 @@ class Yahtzee
         die * n
       end
     end.compact
+  end
+
+  def self.has_three_of_a_kind(dice)
+    [1, 2, 3, 4, 5, 6].map do |die|
+      if dice.count(die) == 3
+        return true
+      end
+    end
+    false
   end
 
 end
